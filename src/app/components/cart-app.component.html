@@ -1,2 +1,8 @@
-<h2>Carro de compras!</h2>
-<catalog [products]="products"/>
+<h2>Catalogo de productos</h2>
+<catalog [products]="products" (productsEventEmitter)="onAddCart($event)"/>
+
+@if(items.length > 0){
+    <cart [items]="items" (idProductProductEmitter)="onDeleteCart($event)"></cart>
+} @else {
+    <div class="alert alert-warning">No hay elementos en el carro!</div>
+}
