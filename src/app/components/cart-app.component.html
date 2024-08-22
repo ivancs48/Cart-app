@@ -4,7 +4,7 @@
     <catalog [products]="products" (productsEventEmitter)="onAddCart($event)" />
 
     @if(showCart){
-    <card-model [items]="items" [total]="total" 
+    <card-model [items]="items"
     (idProductProductEmitter)="onDeleteCart($event)" 
     (openEventEmitter)="openCloseCart()"/>
     }

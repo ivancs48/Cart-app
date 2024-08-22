@@ -15,7 +15,6 @@ import { CardModelComponent } from './card-model/card-model.component';
 export class CartAppComponent implements OnInit {
   products: Product[] = [];
   items: CartItem[] = [];
-  total: number = 0;
   showCart: boolean = false;
 
   constructor(private service: ProductService) {}
@@ -23,7 +22,6 @@ export class CartAppComponent implements OnInit {
   ngOnInit(): void {
     this.products = this.service.findAll();
     this.items = JSON.parse(sessionStorage.getItem('cart') || '[]');
-    this.calculateTotal();
   }
 
   onAddCart(product: Product) {
@@ -40,25 +38,17 @@ export class CartAppComponent implements OnInit {
     } else {
       this.items = [...this.items, { product: { ...product }, quantity: 1 }];
     }
-    this.calculateTotal();
-    this.saveSession();
   }
 
   onDeleteCart(id: number): void {
-    this.items= this.items.filter(item => item.product.id !== id);
-    this.calculateTotal();
-  }
-
-  calculateTotal(): void {
-    this.total = this.items.reduce((total, item) => 
-    total + item.product.price * item.quantity, 0);
-  }
-
-  saveSession(): void{
-    sessionStorage.setItem('cart', JSON.stringify(this.items));
+    this.items = this.items.filter((item) => item.product.id !== id);
+    if (this.items.length == 0) {
+      sessionStorage.removeItem('cart');
+      sessionStorage.clear();
+    }
   }
 
   openCloseCart(): void {
-    this.showCart =!this.showCart;
+    this.showCart = !this.showCart;
   }
 }

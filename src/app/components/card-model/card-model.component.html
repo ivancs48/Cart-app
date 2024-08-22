@@ -11,7 +11,7 @@
 
                 <div class="modal-body">
                     @if(items.length > 0){
-                    <cart [items]="items" [total]="total" 
+                    <cart [items]="items"
                     (idProductProductEmitter)="onDeleteCart($event)" 
                     (openEventEmitter)="openCart()"></cart>
                     } @else {
