@@ -1,19 +1,11 @@
-<navbar [items]="items" (openEventEmitter)="openCart()" />
+<navbar [items]="items" (openEventEmitter)="openCloseCart()" />
 <div class="container my-4">
     <h2>Catalogo de productos</h2>
-    <div class="row">
-        <div [className]="showCart? 'col-9' : 'col'">
-            <catalog [products]="products" (productsEventEmitter)="onAddCart($event)" />
-        </div>
-        @if(showCart){
-        <div class="col-3">
-            @if(items.length > 0){
-            <button class="btn btn-secondary float-end btn-sm" (click)="openCart()">X</button>
-            <cart [items]="items" [total]="total" (idProductProductEmitter)="onDeleteCart($event)"></cart>
-            } @else {
-            <div class="alert alert-warning">No hay elementos en el carro!</div>
-            }
-        </div>
-        }
-    </div>
+    <catalog [products]="products" (productsEventEmitter)="onAddCart($event)" />
+
+    @if(showCart){
+    <card-model [items]="items" [total]="total" 
+    (idProductProductEmitter)="onDeleteCart($event)" 
+    (openEventEmitter)="openCloseCart()"/>
+    }
 </div>

@@ -10,6 +10,7 @@ import { CartItem } from '../../models/cartItem';
 export class NavbarComponent {
 
   @Input() items: CartItem[] = [];
+  
   @Output() openEventEmitter = new EventEmitter();
 
   openCart(): void {
