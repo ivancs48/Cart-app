@@ -3,9 +3,5 @@
     <h2>Catalogo de productos</h2>
     <catalog [products]="products" (productsEventEmitter)="onAddCart($event)" />
 
-    @if(showCart){
-    <card-model [items]="items"
-    (idProductProductEmitter)="onDeleteCart($event)" 
-    (openEventEmitter)="openCloseCart()"/>
-    }
+    <router-outlet></router-outlet>
 </div>
